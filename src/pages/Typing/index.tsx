@@ -146,7 +146,7 @@ const App: React.FC = () => {
     },
     [pronunciationDispatch],
   )
-
+  console.log(wordList, 'wordList')
   return (
     <>
       {modalState && (
@@ -176,8 +176,11 @@ const App: React.FC = () => {
                 {wordList.dictName} 第 {wordList.chapter + 1} 章
               </NavLink>
             </Tooltip>
+            {/* 发音切换 */}
             <PronunciationSwitcher state={pronunciation.toString()} changePronunciationState={changePronunciation} />
+            {/* 声音 提示 音标 深色切换 */}
             <Switcher state={switcherState} dispatch={switcherStateDispatch} />
+            {/* 开始 暂停 */}
             <Tooltip content="快捷键 Enter">
               <button
                 className={`${
@@ -195,6 +198,7 @@ const App: React.FC = () => {
             <div className="container h-full relative flex mx-auto flex-col items-center">
               <div className="h-1/3"></div>
               <div>
+                {/* 打字 */}
                 <Word
                   key={`word-${wordList.words[order].name}-${order}`}
                   word={wordList.words[order].name}
@@ -207,6 +211,7 @@ const App: React.FC = () => {
                 )}
                 <Translation key={`trans-${wordList.words[order].name}`} trans={wordList.words[order].trans.join('；')} />
               </div>
+              {/* 时间 输入数 速度 正确数 正确率 */}
               <Speed correctCount={correctCount} inputCount={inputCount} isStart={isStart} />
             </div>
           </Main>
